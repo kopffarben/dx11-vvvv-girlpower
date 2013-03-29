@@ -1,0 +1,36 @@
+NODE13 Particle Madness workshop step_by_step:
+
+01 patch - Position movement
+
+- add velocity
+
+02 patch - Position Velocity
+
+- add random velocity Damping
+- add Ground Bounce
+- add Ground Bounce smoother
+- add single attractor
+
+03 patch - Ground + attractor
+
+- multiple attractors position + cycle
+- add multiple attractor settings
+- add color from velocity
+
+04 patch - MultiAttractors + color
+
+- add brownian force
+- transform attractor force direction
+
+05 patch - Brownian + attractorsForce transformation
+
+- add emissionCS
+
+06 patch - Emitters
+
+- add more data in the particle buffer: color (float3) and size (float)
+- add emitter color buffer
+- assign color on emission
+- add random emission velocity (using brwnian random dir buffer)
+
+07 patch - Emitter Color + random emission direction
