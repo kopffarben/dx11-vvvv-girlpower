@@ -1,0 +1,62 @@
+#include "BlendFunctions.fxh"
+#include "KeyingFunction.fxh"
+
+float2 R:TARGETSIZE;
+
+SamplerState s0 <bool visible=false;string uiname="Sampler";> {Filter=MIN_MAG_MIP_LINEAR;AddressU=WRAP;AddressV=WRAP;};
+
+cbuffer controls:register(b0){	
+	float Alpha1 <float uimin = 0.0f; float uimax = 1.0; string uiname = "Alpha Texture 1";> = 0.0f;
+	float3 tsa1 <float uimin=0.0; float uimax=1.0;> = 0.0f; // tsa = Threshold, Smooth, AlphaBlur
+	bool Invert1=0;
+	
+	float Alpha2 <float uimin = 0.0f; float uimax = 1.0; string uiname = "Alpha Texture 2";> = 0.0f;
+	float3 tsa2 <float uimin=0.0; float uimax=1.0;> = 0.0f; // tsa = Threshold, Smooth, AlphaBlur
+	bool Invert2=0;
+	
+	float Alpha3 <float uimin = 0.0f; float uimax = 1.0; string uiname = "Alpha Texture 3";> = 0.0f;
+	float3 tsa3 <float uimin=0.0; float uimax=1.0;> = 0.0f; // tsa = Threshold, Smooth, AlphaBlur
+	bool Invert3=0;
+	
+	bool SourceAlpha <bool visible=false;> =0;
+	bool Premultiply <bool visible=false;> =0;
+}
+
+Texture2D tex0: PREVIOUS; //Background Texture
+Texture2D tex1, tex2, tex3;
+Texture2D texMask1 <string uiname = "Mask Texture 1";>;
+Texture2D texMask2 <string uiname = "Mask Texture 2";>;
+Texture2D texMask3 <string uiname = "Mask Texture 3";>;
+
+iBlender Layer1 <string uiname = "Blend Mode 1"; string linkclass = "Normal,Add,Substract,Screen,Multiply,Darken,Lighten,Difference,Exclusion,Overlay,Hardlight,Softlight,Dodge,Burn,Reflect,Glow,Freeze,Heat,Divide";>;
+iBlender Layer2 <string uiname = "Blend Mode 2"; string linkclass = "Normal,Add,Substract,Screen,Multiply,Darken,Lighten,Difference,Exclusion,Overlay,Hardlight,Softlight,Dodge,Burn,Reflect,Glow,Freeze,Heat,Divide";>;
+iBlender Layer3 <string uiname = "Blend Mode 3"; string linkclass = "Normal,Add,Substract,Screen,Multiply,Darken,Lighten,Difference,Exclusion,Overlay,Hardlight,Softlight,Dodge,Burn,Reflect,Glow,Freeze,Heat,Divide";>;
+
+iKeying Keying1 <string uiname = "Keying Mode 1"; string linkclass = "Luma,Saturation,Red,Green,Blue,Alpha";>;
+iKeying Keying2 <string uiname = "Keying Mode 2"; string linkclass = "Luma,Saturation,Red,Green,Blue,Alpha";>;
+iKeying Keying3 <string uiname = "Keying Mode 3"; string linkclass = "Luma,Saturation,Red,Green,Blue,Alpha";>;
+
+float4 pBlender(float4 PosWVP: SV_POSITION, float2 uv: TEXCOORD0): SV_Target
+{
+	float4 c0 = tex0.Sample(s0, uv);
+	float4 c1 = tex1.Sample(s0, uv);
+	float4 c2 = tex2.Sample(s0, uv);
+	float4 c3 = tex3.Sample(s0, uv);
+
+	float4 colkeyed0 = Keying1.Keying(texMask1, s0, uv, R, tsa1.x, tsa1.y, tsa1.z,Invert1, SourceAlpha, Premultiply);	
+	float4 col1 = Layer1.Blend(c0, float4(c1.rgb, colkeyed0.a), Alpha1);
+	
+	float4 colkeyed1 = Keying2.Keying(texMask2, s0, uv, R, tsa2.x, tsa2.y, tsa2.z,Invert2, SourceAlpha, Premultiply);
+	float4 col2 = Layer2.Blend(col1, float4(c2.rgb, colkeyed1.a), Alpha2);
+	
+	float4 colkeyed2 = Keying3.Keying(texMask3, s0, uv, R, tsa3.x, tsa3.y, tsa3.z,Invert3, SourceAlpha, Premultiply);
+	float4 col3 = Layer3.Blend(col2, float4(c3.rgb, colkeyed2.a), Alpha3);
+
+	return col3;
+}
+
+technique11 Blender
+{
+	pass P0 
+	{ SetPixelShader(CompileShader(ps_5_0, pBlender())); }
+} 
