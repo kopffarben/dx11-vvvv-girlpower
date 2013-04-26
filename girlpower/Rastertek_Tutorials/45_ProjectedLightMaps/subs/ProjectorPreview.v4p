@@ -1,0 +1,123 @@
+<!DOCTYPE PATCH  SYSTEM "http://vvvv.org/versions/vvvv45alpha29.3.dtd" >
+   <PATCH nodename="C:\Users\colors1\Desktop\Dx11SandBox\Rastertek_Tutorial\45_ProjectedLightMaps\subs\ProjectorPreview.v4p">
+   <BOUNDS height="4305" left="5925" top="3360" type="Window" width="7260">
+   </BOUNDS>
+   <NODE componentmode="InABox" id="5" nodename="IOBox (Node)">
+   <BOUNDS height="0" left="2490" top="435" type="Node" width="0">
+   </BOUNDS>
+   <BOUNDS height="240" left="2490" top="435" type="Box" width="795">
+   </BOUNDS>
+   <BOUNDS height="160" left="12165" top="8010" type="Window" width="215">
+   </BOUNDS>
+   <PIN pinname="Descriptive Name" slicecount="1" values="|Transform in|">
+   </PIN>
+   <PIN pinname="Output Node" visible="1">
+   </PIN>
+   </NODE>
+   <NODE componentmode="InABox" id="4" nodename="IOBox (Node)">
+   <BOUNDS height="0" left="540" top="2685" type="Node" width="0">
+   </BOUNDS>
+   <BOUNDS height="240" left="540" top="2685" type="Box" width="795">
+   </BOUNDS>
+   <BOUNDS height="160" left="12135" top="9195" type="Window" width="215">
+   </BOUNDS>
+   <PIN pinname="Descriptive Name" slicecount="1" values="|Layers out|">
+   </PIN>
+   <PIN pinname="Input Node" visible="1" slicecount="1" values="||">
+   </PIN>
+   </NODE>
+   <NODE componentmode="Hidden" id="0" nodename="Inverse (Transform)">
+   <BOUNDS height="0" left="1950" top="1125" type="Node" width="0">
+   </BOUNDS>
+   <PIN pinname="Transform Out" visible="1">
+   </PIN>
+   <PIN pinname="Source" slicecount="1" visible="1" values="||">
+   </PIN>
+   </NODE>
+   <LINK dstnodeid="0" dstpinname="Source" srcnodeid="5" srcpinname="Output Node">
+   </LINK>
+   <NODE nodename="UniformScale (Transform)" componentmode="Hidden" id="6">
+   <BOUNDS type="Node" left="1965" top="1500" width="0" height="0">
+   </BOUNDS>
+   <PIN pinname="XYZ" slicecount="1" values="2">
+   </PIN>
+   <PIN pinname="Transform In" visible="1" slicecount="1" values="||">
+   </PIN>
+   <PIN pinname="Transform Out" visible="1">
+   </PIN>
+   </NODE>
+   <NODE componentmode="Hidden" id="2" nodename="Constant (DX11.Effect)" systemname="Constant (DX11.Effect)" filename="%VVVV%\directx11\dx11\Constant.fx">
+   <BOUNDS height="270" left="540" top="2190" type="Node" width="6390">
+   </BOUNDS>
+   <BOUNDS height="6000" left="540" top="2190" type="Box" width="6000">
+   </BOUNDS>
+   <BOUNDS height="12000" left="11280" top="9030" type="Window" width="12000">
+   </BOUNDS>
+   <PIN pinname="Layer" visible="1">
+   </PIN>
+   <PIN pinname="Render State" visible="1" slicecount="1" values="||">
+   </PIN>
+   <PIN pinname="Mesh" visible="1">
+   </PIN>
+   <PIN pinname="Transform" visible="1">
+   </PIN>
+   <PIN pinname="Geometry" visible="1">
+   </PIN>
+   <PIN pinname="Transform In" visible="1">
+   </PIN>
+   <PIN pinname="Alpha" slicecount="1" values="1">
+   </PIN>
+   </NODE>
+   <LINK dstnodeid="4" dstpinname="Input Node" srcnodeid="2" srcpinname="Layer">
+   </LINK>
+   <NODE componentmode="Hidden" id="3" nodename="Box (DX11.Geometry)" systemname="Box (DX11.Geometry)" filename="%VVVV%\directx11\plugins\VVVV.DX11.BasicPrimitives.dll">
+   <BOUNDS height="0" left="1245" top="1725" type="Node" width="0">
+   </BOUNDS>
+   <BOUNDS height="3600" left="1245" top="1725" type="Box" width="4800">
+   </BOUNDS>
+   <BOUNDS height="6000" left="12465" top="8355" type="Window" width="9000">
+   </BOUNDS>
+   <PIN pinname="Mesh" visible="1">
+   </PIN>
+   <PIN pinname="Geometry Out" visible="1">
+   </PIN>
+   </NODE>
+   <LINK srcnodeid="3" srcpinname="Geometry Out" dstnodeid="2" dstpinname="Geometry">
+   </LINK>
+   <NODE componentmode="Hidden" id="1" nodename="Rasterizer (DX11.RenderState)" systemname="Rasterizer (DX11.RenderState)" filename="%VVVV%\directx11\plugins\VVVV.DX11.Nodes.dll">
+   <BOUNDS height="0" left="525" top="1395" type="Node" width="0">
+   </BOUNDS>
+   <PIN pinname="Render State Out" visible="1">
+   </PIN>
+   <PIN pinname="Fill Mode">
+   </PIN>
+   <PIN pinname="Render State" visible="1" slicecount="1" values="||">
+   </PIN>
+   <PIN pinname="Mode" slicecount="1" values="FrontCullWireframe">
+   </PIN>
+   </NODE>
+   <NODE systemname="Transform (Transform 3d)" nodename="Transform (Transform 3d)" componentmode="Hidden" id="7">
+   <BOUNDS type="Node" left="1950" top="1845" width="100" height="100">
+   </BOUNDS>
+   <PIN pinname="Transform In" visible="1">
+   </PIN>
+   <PIN pinname="Transform Out" visible="1">
+   </PIN>
+   <PIN pinname="TranslateX" slicecount="1" values="0">
+   </PIN>
+   <PIN pinname="TranslateY" slicecount="1" values="0">
+   </PIN>
+   <PIN pinname="TranslateZ" slicecount="1" values="0">
+   </PIN>
+   <PIN pinname="ScaleX" slicecount="1" values="1">
+   </PIN>
+   </NODE>
+   <LINK srcnodeid="6" srcpinname="Transform Out" dstnodeid="7" dstpinname="Transform In">
+   </LINK>
+   <LINK srcnodeid="7" srcpinname="Transform Out" dstnodeid="2" dstpinname="Transform In">
+   </LINK>
+   <LINK srcnodeid="1" srcpinname="Render State" dstnodeid="2" dstpinname="Render State">
+   </LINK>
+   <LINK srcnodeid="0" srcpinname="Transform Out" dstnodeid="6" dstpinname="Transform In">
+   </LINK>
+   </PATCH>

@@ -1,0 +1,325 @@
+<!DOCTYPE PATCH  SYSTEM "http://vvvv.org/versions/vvvv45beta29.2.dtd" >
+   <PATCH nodename="C:\Users\colors1\Desktop\Rastertek_Tutorials\19_AlphaMappingTutorial\AlphaMappingTutorial.v4p" filename="C:\Users\colors1\Desktop\Dx11SandBox\LightTutorial\MUltitextureTutorialv4p.v4p" systemname="MUltitextureTutorialv4p">
+   <BOUNDS height="6870" left="570" top="1185" type="Window" width="8985">
+   </BOUNDS>
+   <INFO author="Catweasel" description="Pixel Perfect Transforms for Text" tags="text, transform, pixel,">
+   </INFO>
+   <NODE systemname="Renderer (DX11)" filename="%VVVV%\directx11\plugins\VVVV.DX11.Nodes.dll" nodename="Renderer (DX11)" componentmode="InAWindow" id="32" stayontop="1">
+   <BOUNDS type="Node" left="450" top="5745" width="100" height="100">
+   </BOUNDS>
+   <BOUNDS type="Box" left="450" top="5745" width="6000" height="4500">
+   </BOUNDS>
+   <BOUNDS type="Window" left="9540" top="1200" width="6120" height="4860">
+   </BOUNDS>
+   <PIN pinname="Layers" visible="1" slicecount="1" values="||">
+   </PIN>
+   <PIN pinname="View" visible="1">
+   </PIN>
+   <PIN pinname="Projection" visible="1">
+   </PIN>
+   <PIN pinname="Depth Buffer Mode" slicecount="1" values="Standard">
+   </PIN>
+   <PIN pinname="Depth Buffer Format" slicecount="1" values="D32_Float">
+   </PIN>
+   </NODE>
+   <NODE systemname="Camera (Transform Softimage)" filename="%VVVV%\lib\nodes\modules\Transform\Camera (Transform Softimage).v4p" nodename="Camera (Transform Softimage)" componentmode="Hidden" id="34">
+   <BOUNDS type="Node" left="1710" top="4845" width="100" height="100">
+   </BOUNDS>
+   <PIN pinname="View" visible="1">
+   </PIN>
+   <PIN pinname="Projection" visible="1">
+   </PIN>
+   <PIN pinname="Position" visible="1">
+   </PIN>
+   <PIN pinname="Inital Distance" slicecount="1" values="1.87">
+   </PIN>
+   <PIN pinname="Initial Pitch" slicecount="1" values="0.14">
+   </PIN>
+   </NODE>
+   <LINK srcnodeid="34" srcpinname="View" dstnodeid="32" dstpinname="View">
+   </LINK>
+   <LINK srcnodeid="34" srcpinname="Projection" dstnodeid="32" dstpinname="Projection">
+   </LINK>
+   <NODE systemname="Blend (DX11.RenderState)" filename="%VVVV%\directx11\plugins\VVVV.DX11.Nodes.dll" nodename="Blend (DX11.RenderState)" componentmode="Hidden" id="36">
+   <BOUNDS type="Node" left="450" top="2700" width="100" height="100">
+   </BOUNDS>
+   <PIN pinname="Render State" visible="1" slicecount="1" values="||">
+   </PIN>
+   <PIN pinname="Mode" slicecount="1" values="Blend">
+   </PIN>
+   </NODE>
+   <NODE nodename="IOBox (Color)" componentmode="InABox" id="37" systemname="IOBox (Color)">
+   <BOUNDS type="Node" left="3480" top="3300" width="0" height="0">
+   </BOUNDS>
+   <BOUNDS type="Box" left="3480" top="3300" width="510" height="480">
+   </BOUNDS>
+   <PIN pinname="Color Input" slicecount="1" values="|1.00000,0.86926,0.92331,1.00000|">
+   </PIN>
+   <PIN pinname="Descriptive Name" slicecount="1" values="Color">
+   </PIN>
+   </NODE>
+   <NODE nodename="IOBox (Value Advanced)" componentmode="InABox" id="52" systemname="IOBox (Value Advanced)">
+   <BOUNDS type="Node" left="1950" top="1980" width="0" height="0">
+   </BOUNDS>
+   <BOUNDS type="Box" left="1950" top="1980" width="795" height="240">
+   </BOUNDS>
+   <PIN pinname="Y Input Value" slicecount="1" values="1">
+   </PIN>
+   <PIN pinname="Units" slicecount="1" values="||">
+   </PIN>
+   <PIN pinname="Precision" slicecount="1" values="4">
+   </PIN>
+   <PIN pinname="Descriptive Name" slicecount="1" values="Alpha">
+   </PIN>
+   </NODE>
+   <NODE systemname="IOBox (Value Advanced)" nodename="IOBox (Value Advanced)" componentmode="InABox" id="54">
+   <BOUNDS type="Node" left="1455" top="2925" width="100" height="100">
+   </BOUNDS>
+   <BOUNDS type="Box" left="1455" top="2925" width="795" height="240">
+   </BOUNDS>
+   <PIN pinname="Y Output Value" visible="1">
+   </PIN>
+   <PIN pinname="Y Input Value" slicecount="1" values="100">
+   </PIN>
+   </NODE>
+   <NODE systemname="Torus (DX11.Geometry)" filename="%VVVV%\directx11\plugins\VVVV.DX11.BasicPrimitives.dll" nodename="Torus (DX11.Geometry)" componentmode="Hidden" id="33">
+   <BOUNDS type="Node" left="945" top="3465" width="100" height="100">
+   </BOUNDS>
+   <PIN pinname="Geometry Out" visible="1">
+   </PIN>
+   <PIN pinname="Resolution X" visible="1" slicecount="1" values="15">
+   </PIN>
+   <PIN pinname="Resolution Y" visible="1" slicecount="1" values="15">
+   </PIN>
+   <PIN pinname="Thickness" slicecount="1" values="0.51">
+   </PIN>
+   </NODE>
+   <LINK srcnodeid="54" srcpinname="Y Output Value" dstnodeid="33" dstpinname="Resolution X">
+   </LINK>
+   <LINK srcnodeid="54" srcpinname="Y Output Value" dstnodeid="33" dstpinname="Resolution Y">
+   </LINK>
+   <NODE nodename="IOBox (Value Advanced)" componentmode="InABox" id="62" systemname="IOBox (Value Advanced)">
+   <BOUNDS type="Node" left="2445" top="3210" width="0" height="0">
+   </BOUNDS>
+   <BOUNDS type="Box" left="2445" top="3210" width="795" height="240">
+   </BOUNDS>
+   <PIN pinname="Y Input Value" slicecount="1" values="1.75">
+   </PIN>
+   <PIN pinname="Units" slicecount="1" values="||">
+   </PIN>
+   <PIN pinname="Precision" slicecount="1" values="4">
+   </PIN>
+   <PIN pinname="Descriptive Name" slicecount="1" values="GammaBlend">
+   </PIN>
+   </NODE>
+   <NODE systemname="Count (Node)" nodename="Count (Node)" componentmode="Hidden" id="63">
+   <BOUNDS type="Node" left="5445" top="2115" width="100" height="100">
+   </BOUNDS>
+   <PIN pinname="Input" visible="1" slicecount="1" values="||">
+   </PIN>
+   <PIN pinname="Count" visible="1">
+   </PIN>
+   </NODE>
+   <NODE nodename="IOBox (Value Advanced)" componentmode="InABox" id="64" systemname="IOBox (Value Advanced)">
+   <BOUNDS type="Node" left="5460" top="2715" width="0" height="0">
+   </BOUNDS>
+   <BOUNDS type="Box" left="5460" top="2715" width="795" height="240">
+   </BOUNDS>
+   <PIN pinname="Y Input Value" slicecount="1" visible="1" values="4">
+   </PIN>
+   <PIN pinname="Units" slicecount="1" values="||">
+   </PIN>
+   <PIN pinname="Precision" slicecount="1" values="4">
+   </PIN>
+   <PIN pinname="Value Type" slicecount="1" values="Integer">
+   </PIN>
+   <PIN pinname="Descriptive Name" slicecount="1" values="|Texture Bin Size|">
+   </PIN>
+   </NODE>
+   <LINK srcnodeid="63" srcpinname="Count" dstnodeid="64" dstpinname="Y Input Value">
+   </LINK>
+   <NODE nodename="IOBox (String)" componentmode="InABox" id="65" systemname="IOBox (String)">
+   <BOUNDS type="Node" left="6480" top="1320" width="1455" height="270">
+   </BOUNDS>
+   <BOUNDS type="Box" left="6480" top="1320" width="1455" height="270">
+   </BOUNDS>
+   <PIN pinname="Input String" visible="0" slicecount="1" values="|take a few pictures|">
+   </PIN>
+   <PIN pinname="Output String" visible="0">
+   </PIN>
+   <PIN pinname="Show Grid" slicecount="1" values="0">
+   </PIN>
+   <PIN pinname="String Type" slicecount="1" values="MultiLine">
+   </PIN>
+   </NODE>
+   <NODE nodename="IOBox (Value Advanced)" componentmode="InABox" id="66" systemname="IOBox (Value Advanced)">
+   <BOUNDS type="Node" left="2955" top="2520" width="0" height="0">
+   </BOUNDS>
+   <BOUNDS type="Box" left="2955" top="2520" width="795" height="240">
+   </BOUNDS>
+   <PIN pinname="Y Input Value" slicecount="1" values="0">
+   </PIN>
+   <PIN pinname="Units" slicecount="1" values="||">
+   </PIN>
+   <PIN pinname="Precision" slicecount="1" values="4">
+   </PIN>
+   <PIN pinname="Value Type" slicecount="1" values="Integer">
+   </PIN>
+   <PIN pinname="Descriptive Name" slicecount="1" values="indexIn1">
+   </PIN>
+   </NODE>
+   <NODE nodename="IOBox (String)" componentmode="InABox" id="80" systemname="IOBox (String)">
+   <BOUNDS type="Node" left="495" top="1140" width="3195" height="270">
+   </BOUNDS>
+   <BOUNDS type="Box" left="495" top="1140" width="3195" height="270">
+   </BOUNDS>
+   <PIN pinname="Input String" visible="0" slicecount="1" values="http://www.rastertek.com/dx11tut19.html">
+   </PIN>
+   <PIN pinname="Output String" visible="0">
+   </PIN>
+   <PIN pinname="Show Grid" slicecount="1" values="0">
+   </PIN>
+   <PIN pinname="String Type" slicecount="1" values="MultiLine">
+   </PIN>
+   </NODE>
+   <NODE systemname="AlphaMappingTutorial (DX11.Effect)" filename="AlphaMappingTutorial.fx" nodename="AlphaMappingTutorial (DX11.Effect)" componentmode="Hidden" id="31">
+   <BOUNDS type="Node" left="450" top="4305" width="7095" height="270">
+   </BOUNDS>
+   <PIN pinname="Layer" visible="1">
+   </PIN>
+   <PIN pinname="Geometry" visible="1">
+   </PIN>
+   <PIN pinname="Render State" visible="1">
+   </PIN>
+   <PIN pinname="Alpha">
+   </PIN>
+   <PIN pinname="Texture" visible="1" slicecount="1" values="||">
+   </PIN>
+   <PIN pinname="AmbientColorXYZW">
+   </PIN>
+   <PIN pinname="DiffuseColorXYZW">
+   </PIN>
+   <PIN pinname="DiffuseIntensity" visible="1">
+   </PIN>
+   <PIN pinname="AmbientIntensity">
+   </PIN>
+   <PIN pinname="View" visible="1">
+   </PIN>
+   <PIN pinname="Projection" visible="1">
+   </PIN>
+   <PIN pinname="lightDirectionXYZ" visible="1">
+   </PIN>
+   <PIN pinname="DiffiuseColor">
+   </PIN>
+   <PIN pinname="Technique" slicecount="1" values="AlphaMapping">
+   </PIN>
+   <PIN pinname="padding">
+   </PIN>
+   <PIN pinname="cameraPositionXYZ" visible="1">
+   </PIN>
+   <PIN pinname="specularPower">
+   </PIN>
+   <PIN pinname="lightIntensity">
+   </PIN>
+   <PIN pinname="Texture Bin Size">
+   </PIN>
+   <PIN pinname="AlphaTexture" visible="1" slicecount="1" values="||">
+   </PIN>
+   </NODE>
+   <LINK srcnodeid="31" srcpinname="Layer" dstnodeid="32" dstpinname="Layers">
+   </LINK>
+   <LINK srcnodeid="36" srcpinname="Render State" dstnodeid="31" dstpinname="Render State">
+   </LINK>
+   <LINK srcnodeid="37" srcpinname="Color Output" dstnodeid="31" dstpinname="Color">
+   </LINK>
+   <LINK srcnodeid="52" srcpinname="Y Output Value" dstnodeid="31" dstpinname="Alpha">
+   </LINK>
+   <LINK srcnodeid="33" srcpinname="Geometry Out" dstnodeid="31" dstpinname="Geometry">
+   </LINK>
+   <LINK srcnodeid="62" srcpinname="Y Output Value" dstnodeid="31" dstpinname="GammaBlend">
+   </LINK>
+   <LINK srcnodeid="64" srcpinname="Y Output Value" dstnodeid="31" dstpinname="Texture Bin Size">
+   </LINK>
+   <LINK srcnodeid="66" srcpinname="Y Output Value" dstnodeid="31" dstpinname="indexIn1">
+   </LINK>
+   <NODE nodename="IOBox (String)" componentmode="InABox" id="82" systemname="IOBox (String)">
+   <BOUNDS type="Node" left="6000" top="3225" width="0" height="0">
+   </BOUNDS>
+   <BOUNDS type="Box" left="6000" top="3225" width="795" height="240">
+   </BOUNDS>
+   <PIN pinname="Input String" slicecount="1" values="*.bmp">
+   </PIN>
+   <PIN pinname="Default" slicecount="1" values="*.*">
+   </PIN>
+   <PIN pinname="File Mask" slicecount="1" values="*.*">
+   </PIN>
+   <PIN pinname="Maximum Characters" slicecount="1" values="-1">
+   </PIN>
+   </NODE>
+   <NODE nodename="IOBox (String)" componentmode="InABox" id="83" systemname="IOBox (String)">
+   <BOUNDS type="Node" left="7185" top="4005" width="0" height="0">
+   </BOUNDS>
+   <BOUNDS type="Box" left="7185" top="4005" width="795" height="240">
+   </BOUNDS>
+   <PIN pinname="Default" slicecount="1" values="text">
+   </PIN>
+   <PIN pinname="File Mask" slicecount="1" values="||">
+   </PIN>
+   <PIN pinname="Maximum Characters" slicecount="1" values="-1">
+   </PIN>
+   <PIN pinname="Input String" visible="1" slicecount="1" values="||">
+   </PIN>
+   </NODE>
+   <NODE nodename="IOBox (Value Advanced)" componentmode="InABox" id="85" systemname="IOBox (Value Advanced)">
+   <BOUNDS type="Node" left="5610" top="1320" width="0" height="0">
+   </BOUNDS>
+   <BOUNDS type="Box" left="5610" top="1320" width="795" height="240">
+   </BOUNDS>
+   <PIN pinname="Y Input Value" slicecount="1" values="3">
+   </PIN>
+   <PIN pinname="Units" slicecount="1" values="||">
+   </PIN>
+   <PIN pinname="Precision" slicecount="1" values="4">
+   </PIN>
+   <PIN pinname="Value Type" slicecount="1" values="Integer">
+   </PIN>
+   </NODE>
+   <NODE systemname="SystemTexture (DX11 2d)" filename="..\Modules\SystemTexture (DX11 2d).v4p" nodename="SystemTexture (DX11 2d)" componentmode="Hidden" id="81">
+   <BOUNDS type="Node" left="5985" top="3705" width="100" height="100">
+   </BOUNDS>
+   <PIN pinname="Texture Out" visible="1">
+   </PIN>
+   <PIN pinname="Index" slicecount="1" values="5">
+   </PIN>
+   <BOUNDS type="Window" left="9735" top="3510" width="4140" height="5730">
+   </BOUNDS>
+   <PIN pinname="Short Filenames" visible="1">
+   </PIN>
+   </NODE>
+   <LINK srcnodeid="81" srcpinname="Texture Out" dstnodeid="31" dstpinname="AlphaTexture">
+   </LINK>
+   <LINK srcnodeid="82" srcpinname="Output String" dstnodeid="81" dstpinname="Mask">
+   </LINK>
+   <LINK srcnodeid="81" srcpinname="Short Filenames" dstnodeid="83" dstpinname="Input String">
+   </LINK>
+   <NODE systemname="SystemTexture (DX11 2d)" filename="..\Modules\SystemTexture (DX11 2d).v4p" nodename="SystemTexture (DX11 2d)" componentmode="Hidden" id="84">
+   <BOUNDS type="Node" left="4980" top="1740" width="100" height="100">
+   </BOUNDS>
+   <PIN pinname="Texture Out" visible="1">
+   </PIN>
+   <PIN pinname="Index" slicecount="1" values="5">
+   </PIN>
+   <BOUNDS type="Window" left="9735" top="3510" width="6360" height="5730">
+   </BOUNDS>
+   <PIN pinname="Short Filenames" visible="1">
+   </PIN>
+   <BOUNDS type="Box" left="4980" top="1740">
+   </BOUNDS>
+   </NODE>
+   <LINK srcnodeid="84" srcpinname="Texture Out" dstnodeid="31" dstpinname="Texture">
+   </LINK>
+   <LINK srcnodeid="84" srcpinname="Texture Out" dstnodeid="63" dstpinname="Input">
+   </LINK>
+   <LINK srcnodeid="85" srcpinname="Y Output Value" dstnodeid="84" dstpinname="Bin Size">
+   </LINK>
+   </PATCH>

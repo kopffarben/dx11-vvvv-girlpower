@@ -1,0 +1,108 @@
+struct vs2ps { float4 PosWVP: SV_POSITION; float2 TexCd: TEXCOORD0; };
+
+SamplerState sam : IMMUTABLE { Filter = MIN_MAG_MIP_LINEAR;AddressU = Clamp;AddressV = Clamp;};
+ 
+
+
+
+float blur = 0 ;
+
+float2 XYres :TARGETSIZE ;
+
+Texture2D tex : PREVIOUS;
+
+float4 GYPS(vs2ps In) : SV_Target
+{  static const int g_cKernelSize = 7;
+
+float2 mult = 1.0f/XYres * blur;
+float2 TexelKernel[7] =
+{
+    { -3, 0 },
+    { -2, 0 },
+    { -1, 0 },
+    {  0, 0 },
+    {  1, 0 },
+    {  2, 0 },
+    {  3, 0 },
+};
+
+const float BlurWeights[7] =
+{
+	0.006,
+	0.061,
+	0.242,
+	0.383,
+	0.242,	
+	0.061,
+	0.006
+};
+
+    float4 Color = 0;
+
+    for (int i = 0; i < 7; i++)
+    {    
+        Color += tex.Sample(sam, In.TexCd + TexelKernel[i].yx * mult) * BlurWeights[i];
+    }
+    
+    return Color;
+}
+
+float4 GXPS(vs2ps In) : SV_Target
+{  
+	static const int g_cKernelSize = 7;
+
+ float2 mult = 1.0f/XYres*blur;
+
+float2 TexelKernel[7] =
+{
+    { -3, 0 },
+    { -2, 0 },
+    { -1, 0 },
+    {  0, 0 },
+    {  1, 0 },
+    {  2, 0 },
+    {  3, 0 },
+};
+
+
+
+const float BlurWeights[7] =
+{
+	0.006,
+	0.061,
+	0.242,
+	0.383,
+	0.242,	
+	0.061,
+	0.006
+};
+
+    float4 Color = 0;
+
+    for (int i = 0; i < 7; i++)
+    {
+        Color += tex.Sample(sam, In.TexCd + TexelKernel[i].xy * mult) * BlurWeights[i];
+    }
+
+    return Color;
+}
+
+technique10 BlurG
+{
+	pass P0
+	{ 
+		SetPixelShader( CompileShader( ps_5_0, GXPS() ) );
+	}
+	pass P1
+	{ 
+		SetPixelShader( CompileShader( ps_5_0, GYPS() ) );
+	}	
+		pass P2
+	{ 
+		SetPixelShader( CompileShader( ps_5_0, GXPS() ) );
+	}
+	pass P3
+	{ 
+		SetPixelShader( CompileShader( ps_5_0, GYPS() ) );
+	}	
+}
